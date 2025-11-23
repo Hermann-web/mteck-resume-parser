@@ -98,6 +98,30 @@ def test_generator_generate_to_file(tmp_path: Path) -> None:
     assert "Content: Test content" in output_file.read_text()
 
 
+def test_generator_generate_to_file_creates_parent_dir(tmp_path: Path) -> None:
+    """Test that generate_to_file creates parent directories."""
+    from resumodel.models import TemplateContext, ResumeSections
+
+    template_file = tmp_path / "template.tex.j2"
+    template_file.write_text("Test")
+
+    # Use a nested path that doesn't exist
+    output_file = tmp_path / "deeply" / "nested" / "output.tex"
+    assert not output_file.parent.exists()
+
+    generator = ResumeGenerator(template_file)
+    context = TemplateContext(
+        personal_info=PersonalInfo(name="Test"),
+        title="Test",
+        summary="Test",
+        sections=ResumeSections(),
+    )
+    generator.generate_to_file(context, output_file)
+
+    assert output_file.exists()
+    assert output_file.parent.exists()
+
+
 def test_latex_escape() -> None:
     """Test LaTeX character escaping."""
     from resumodel.generator import ResumeGenerator
@@ -109,6 +133,25 @@ def test_latex_escape() -> None:
     assert ResumeGenerator._latex_escape("#") == r"\#"
     assert ResumeGenerator._latex_escape("_") == r"\_"
     assert ResumeGenerator._latex_escape("Test & Co.") == r"Test \& Co."
+
+
+def test_latex_escape_filter_in_template(tmp_path: Path) -> None:
+    """Test that latex_escape filter is available in templates."""
+    from resumodel.models import TemplateContext, ResumeSections
+
+    template_file = tmp_path / "template.tex.j2"
+    template_file.write_text("{{ summary | latex_escape }}")
+
+    generator = ResumeGenerator(template_file)
+    context = TemplateContext(
+        personal_info=PersonalInfo(name="Test"),
+        title="Test",
+        summary="Machine Learning & Data Science",
+        sections=ResumeSections(),
+    )
+    result = generator.generate(context)
+
+    assert r"Machine Learning \& Data Science" in result
 
 
 def test_generator_with_personal_info(tmp_path: Path) -> None:

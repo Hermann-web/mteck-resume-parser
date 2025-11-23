@@ -71,6 +71,7 @@ Before pushing code, ensure all checks pass:
 ```bash
 # Run all checks
 uv run pytest tests/ -v
+uv run pytest --cov=src/resumodel --cov-report=term-missing tests/
 uv run mypy src/resumodel/
 uv run ruff format .
 uv run ruff check .
