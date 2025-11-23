@@ -1,7 +1,7 @@
 """YAML loading and data resolution."""
 
 from pathlib import Path
-from typing import Any, TypeVar
+from typing import TypeVar
 import yaml
 from pydantic import BaseModel, ValidationError
 

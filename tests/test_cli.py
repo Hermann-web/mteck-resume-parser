@@ -2,11 +2,10 @@
 
 import pytest
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import sys
 
 from resumodel.cli import main
-from resumodel.exceptions import ConfigError, DataError, TemplateError
 
 
 def test_cli_success(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:

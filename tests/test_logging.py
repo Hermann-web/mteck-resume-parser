@@ -1,7 +1,6 @@
 """Tests for logging configuration."""
 
 import logging
-import pytest
 
 from resumodel.logging import setup_logging, logger
 
