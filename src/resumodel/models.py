@@ -41,7 +41,7 @@ class Project(BaseModel):
     """Project entry."""
 
     name: str
-    link: HttpUrl
+    link: Optional[HttpUrl] = None
     description: str
 
 
