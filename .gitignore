@@ -1,5 +1,9 @@
 # Ouptut
 
+*.aux
+*.log
+*.out
+*.pdf
 output/
 
 # Byte-compiled / optimized / DLL files

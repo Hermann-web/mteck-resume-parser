@@ -128,22 +128,22 @@
 %%%%%%%%%%%%%%%%%%%%%%
 
 \hypersetup{
-    pdftitle={{personal_info.name}}'s Resume,
-    pdfauthor={{personal_info.name}},
+    pdftitle={{personal_info.name|latex_escape}}'s Resume,
+    pdfauthor={{personal_info.name|latex_escape}},
     pdfsubject={Resume},
     pdfkeywords={Resume, CV}
 }
 
 \begin{document}
 
-\documentTitle{ {{personal_info.name}} }{ {{title}} }{
-{% if personal_info.phone %}    \href{tel:{{personal_info.phone}}}{\raisebox{-0.05\height} \faPhone\ {{personal_info.phone}}} ~ | ~
-{% endif %}{% if personal_info.email %}    \href{mailto:{{personal_info.email}}}{\raisebox{-0.15\height} \faEnvelope\ {{personal_info.email}}} ~ | ~
-{% endif %}{% if personal_info.linkedin %}    \href{ {{personal_info.linkedin}} }{\raisebox{-0.15\height} \faLinkedin\ {{personal_info.linkedin|replace('https://', '')}}} ~ | ~
-{% endif %}{% if personal_info.github %}    \href{ {{personal_info.github}} }{\raisebox{-0.15\height} \faGithub\ {{personal_info.github|replace('https://', '')}}} ~ | ~
-{% endif %}{% if personal_info.blog %}    \href{ {{personal_info.blog}} }{\raisebox{-0.15\height} \faPen\ {{personal_info.blog|replace('https://', '')}}} ~ | ~
-{% endif %}{% if personal_info.projects_page %}    \href{ {{personal_info.projects_page}} }{\raisebox{-0.15\height} \faKeyboard\ {{personal_info.projects_page|replace('https://', '')}}} ~ | ~
-{% endif %}{% if personal_info.pypi %}    \href{ {{personal_info.pypi}} }{\raisebox{-0.15\height} \faPython\ {{personal_info.pypi|replace('https://', '')}}} ~ | ~
+\documentTitle{ {{personal_info.name|latex_escape}} }{ {{title|latex_escape}} }{
+{% if personal_info.phone %}    \href{tel:{{personal_info.phone}}}{\raisebox{-0.05\height} \faPhone\ {{personal_info.phone|latex_escape}}} ~ | ~
+{% endif %}{% if personal_info.email %}    \href{mailto:{{personal_info.email}}}{\raisebox{-0.15\height} \faEnvelope\ {{personal_info.email|latex_escape}}} ~ | ~
+{% endif %}{% if personal_info.linkedin %}    \href{ {{personal_info.linkedin}} }{\raisebox{-0.15\height} \faLinkedin\ {{personal_info.linkedin|replace('https://', '')|latex_escape}}} ~ | ~
+{% endif %}{% if personal_info.github %}    \href{ {{personal_info.github}} }{\raisebox{-0.15\height} \faGithub\ {{personal_info.github|replace('https://', '')|latex_escape}}} ~ | ~
+{% endif %}{% if personal_info.blog %}    \href{ {{personal_info.blog}} }{\raisebox{-0.15\height} \faPen\ {{personal_info.blog|replace('https://', '')|latex_escape}}} ~ | ~
+{% endif %}{% if personal_info.projects_page %}    \href{ {{personal_info.projects_page}} }{\raisebox{-0.15\height} \faKeyboard\ {{personal_info.projects_page|replace('https://', '')|latex_escape}}} ~ | ~
+{% endif %}{% if personal_info.pypi %}    \href{ {{personal_info.pypi}} }{\raisebox{-0.15\height} \faPython\ {{personal_info.pypi|replace('https://', '')|latex_escape}}} ~ | ~
 {% endif %}{% if personal_info.passport_dev %}    \href{ {{personal_info.passport_dev}} }{\raisebox{-0.15\height} \faPassport\ passeport.dev}
 {% endif %}}
 
@@ -151,7 +151,7 @@
 \begin{minipage}{1\textwidth}
     \begin{center}
         \tinysection{Summary}
-        {{summary}}
+        {{summary|latex_escape}}
     \end{center}%
 \end{minipage}%
 
@@ -159,60 +159,60 @@
 \vspace{2em}
 
 \begin{multicols}{2}
-{% for skill_category in sections.skills %}    \skillsubsection{ {{skill_category.category}} }
+{% for skill_category in sections.skills %}    \skillsubsection{ {{skill_category.category|latex_escape}} }
     \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=15pt]
-{% for skill_item in skill_category.items %}        \item {{skill_item}}
+{% for skill_item in skill_category.items %}        \item {{skill_item|latex_escape}}
 {% endfor %}    \end{itemize}
 {% endfor %}\end{multicols}
 {% endif %}
 
 {% if sections.experiences %}
 \section{Experiences}
-{% for experience in sections.experiences %}    \headingBf{ {{experience.company}} }{ {{experience.date}} }
-    \headingIt{ {{experience.title}}{% if experience.location %} ({{experience.location}}){% endif %} }{}
+{% for experience in sections.experiences %}    \headingBf{ {{experience.company|latex_escape}} }{ {{experience.date|latex_escape}} }
+    \headingIt{ {{experience.title|latex_escape}}{% if experience.location %} ({{experience.location|latex_escape}}){% endif %} }{}
 {% if experience.bullet_points %}    \begin{resume_list}
-{% for point in experience.bullet_points %}        \item {{point}}{% if loop.last and experience.link %} (\href{ {{experience.link}} }{link}){% endif %}
+{% for point in experience.bullet_points %}        \item {{point|latex_escape}}{% if loop.last and experience.link %} (\href{ {{experience.link}} }{link}){% endif %}
 {% endfor %}    \end{resume_list}
 {% endif %}{% endfor %}{% endif %}
 
 {% if sections.education %}
 \section{Education}
-{% for edu in sections.education %}    \headingBf{ {{edu.institution}} }{ {{edu.location}} }
-    \headingIt{ {{edu.degree}}{% if edu.notes %} \textnormal{({{edu.notes}})}{% endif %} }{}
+{% for edu in sections.education %}    \headingBf{ {{edu.institution|latex_escape}} }{ {{edu.location|latex_escape}} }
+    \headingIt{ {{edu.degree|latex_escape}}{% if edu.notes %} \textnormal{({{edu.notes|latex_escape}})}{% endif %} }{}
 {% endfor %}{% endif %}
 
 {% if sections.certifications %}
 \section{Certifications \& Awards}
 \begin{resume_list}
-{% for cert in sections.certifications %}    \item {{cert.name}} - \textbf{ {{cert.issuer}} } (\href{ {{cert.credential_link}} }{credential})
+{% for cert in sections.certifications %}    \item {{cert.name|latex_escape}} - \textbf{ {{cert.issuer|latex_escape}} } (\href{ {{cert.credential_link}} }{credential})
 {% endfor %}\end{resume_list}
 {% endif %}
 
 {% if sections.research_papers %}
 \section{Research / Working Papers}
 \begin{resume_list}
-{% for paper in sections.research_papers %}    \item {{paper.authors}}, \textit{ {{paper.title}} }. ({{paper.status}}){% if paper.link %} (\href{ {{paper.link}} }{link}){% endif %}
+{% for paper in sections.research_papers %}    \item {{paper.authors|latex_escape}}, \textit{ {{paper.title|latex_escape}} }. ({{paper.status|latex_escape}}){% if paper.link %} (\href{ {{paper.link}} }{link}){% endif %}
 {% endfor %}\end{resume_list}
 {% endif %}
 
 {% if sections.projects %}
 \section{Projects}
 \begin{resume_list}
-{% for project in sections.projects %}    \item \textbf{\href{ {{project.link}} }{ {{project.name}} } \faLink\ } {{project.description}}
+{% for project in sections.projects %}    \item \textbf{\href{ {{project.link}} }{ {{project.name|latex_escape}} } \faLink\ } {{project.description|latex_escape}}
 {% endfor %}\end{resume_list}
 {% endif %}
 
 {% if sections.clubs_and_associations %}
 \section{Clubs and Associations}
 \begin{resume_list}
-{% for club in sections.clubs_and_associations %}    \item \heading{\textbf{ {{club.name}} } - {{club.role}} }{ {{club.date}} }
-{% if club.description %}    {{club.description}}
+{% for club in sections.clubs_and_associations %}    \item \heading{\textbf{ {{club.name|latex_escape}} } - {{club.role|latex_escape}} }{ {{club.date|latex_escape}} }
+{% if club.description %}    {{club.description|latex_escape}}
 {% endif %}{% endfor %}\end{resume_list}
 {% endif %}
 
 {% if sections.hobbies %}
 \section{Hobbies}
-{% for hobby in sections.hobbies %}    {{hobby.name}}{% if hobby.link %} \href{ {{hobby.link}} }{\faLink\ }{% endif %}{% if not loop.last %} ~ | ~ {% endif %}
+{% for hobby in sections.hobbies %}    {{hobby.name|latex_escape}}{% if hobby.link %} \href{ {{hobby.link}} }{\faLink\ }{% endif %}{% if not loop.last %} ~ | ~ {% endif %}
 {% endfor %}{% endif %}
 
 \end{document}
