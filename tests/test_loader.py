@@ -16,7 +16,9 @@ from resumodel.models import (
 
 def test_load_shared_data_not_found() -> None:
     """Test loading from non-existent directory."""
-    with pytest.raises(FileNotFoundError):
+    from resumodel.exceptions import ConfigError
+
+    with pytest.raises(ConfigError):
         load_shared_data(Path("/nonexistent/directory"))
 
 
@@ -103,15 +105,19 @@ def test_build_resume_context(tmp_path: Path) -> None:
 
 def test_build_resume_context_missing_profile() -> None:
     """Test building context with missing profile."""
+    from resumodel.exceptions import DataError
+
     shared = SharedData()
     personal_info = PersonalInfo(name="Test")
 
-    with pytest.raises(ValueError, match="Profile 'MISSING' not found"):
+    with pytest.raises(DataError, match="Profile 'MISSING' not found"):
         build_resume_context(personal_info, "MISSING", shared)
 
 
 def test_build_resume_context_missing_reference() -> None:
     """Test building context with missing experience reference."""
+    from resumodel.exceptions import DataError
+
     shared = SharedData()
     shared.profiles["TEST"] = Profile(
         title="Test",
@@ -121,5 +127,5 @@ def test_build_resume_context_missing_reference() -> None:
 
     personal_info = PersonalInfo(name="Test")
 
-    with pytest.raises(KeyError):
+    with pytest.raises(DataError):
         build_resume_context(personal_info, "TEST", shared)

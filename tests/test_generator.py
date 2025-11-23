@@ -18,7 +18,9 @@ def test_generator_init_valid(tmp_path: Path) -> None:
 
 def test_generator_init_missing_template() -> None:
     """Test initializing with missing template."""
-    with pytest.raises(FileNotFoundError):
+    from resumodel.exceptions import TemplateError
+
+    with pytest.raises(TemplateError):
         ResumeGenerator(Path("/nonexistent/template.tex"))
 
 

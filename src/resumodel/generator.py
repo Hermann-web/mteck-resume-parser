@@ -4,8 +4,10 @@
 """Resume generation with Jinja2 templates."""
 
 from pathlib import Path
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 from resumodel.models import TemplateContext
+from resumodel.exceptions import TemplateError
+from resumodel.logging import logger
 
 
 class ResumeGenerator:
@@ -16,13 +18,18 @@ class ResumeGenerator:
 
         Args:
             template_path: Path to Jinja2 template file
+
+        Raises:
+            TemplateError: If template file not found
         """
         self.template_path = template_path
         if not template_path.exists():
-            raise FileNotFoundError(f"Template not found: {template_path}")
+            raise TemplateError(f"Template not found: {template_path}")
 
         # Set up Jinja2 environment
         template_dir = template_path.parent
+        logger.debug(f"Initializing Jinja2 environment in {template_dir}")
+
         self.env = Environment(
             loader=FileSystemLoader(str(template_dir)),
             trim_blocks=True,
@@ -32,7 +39,12 @@ class ResumeGenerator:
         # Add custom filters for LaTeX escaping
         self.env.filters["latex_escape"] = self._latex_escape
 
-        self.template = self.env.get_template(template_path.name)
+        try:
+            self.template = self.env.get_template(template_path.name)
+        except TemplateNotFound as e:
+            raise TemplateError(
+                f"Failed to load template {template_path.name}: {e}"
+            ) from e
 
     @staticmethod
     def _latex_escape(text: str) -> str:
@@ -69,8 +81,15 @@ class ResumeGenerator:
 
         Returns:
             Rendered template content
+
+        Raises:
+            TemplateError: If rendering fails
         """
-        return self.template.render(context)
+        logger.debug("Rendering template...")
+        try:
+            return self.template.render(context)
+        except Exception as e:
+            raise TemplateError(f"Failed to render template: {e}") from e
 
     def generate_to_file(self, context: TemplateContext, output_path: Path) -> None:
         """Generate resume and write to file.
@@ -87,4 +106,4 @@ class ResumeGenerator:
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(content)
 
-        print(f"✓ Generated resume: {output_path}")
+        logger.info(f"Generated resume: {output_path}")

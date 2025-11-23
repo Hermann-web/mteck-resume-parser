@@ -5,11 +5,13 @@
 
 import argparse
 import sys
+import logging
 from pathlib import Path
-from pydantic import ValidationError
 
 from resumodel.loader import load_personal_info, load_shared_data, build_resume_context
 from resumodel.generator import ResumeGenerator
+from resumodel.exceptions import ResuModelError
+from resumodel.logging import setup_logging, logger
 
 
 def main() -> None:
@@ -23,7 +25,7 @@ Examples:
   resumodel -d examples/hermann -p DATASCIENTIST -t templates/resume.tex.j2 -o output/hermann.tex
 
   # Generate Jane's Backend Developer resume
-  resumodel -d examples/jane_backend -p DEVBACKEND -t templates/resume.tex.j2 -o output/jane.tex
+  resumodel -d examples/jane_doe -p SOFTWARE_ENGINEER -t templates/resume.tex.j2 -o output/jane.tex
         """,
     )
 
@@ -55,44 +57,44 @@ Examples:
         required=True,
         help="Output file path",
     )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Enable debug logging",
+    )
 
     args = parser.parse_args()
 
+    # Configure logging
+    log_level = logging.DEBUG if args.verbose else logging.INFO
+    setup_logging(level=log_level)
+
     try:
         # Load personal info
-        print(f"Loading personal info from {args.data_dir}...")
+        logger.info(f"Loading personal info from {args.data_dir}...")
         personal_info = load_personal_info(args.data_dir)
 
         # Load data from directory
-        print(f"Loading data from {args.data_dir}...")
+        logger.info(f"Loading data from {args.data_dir}...")
         shared = load_shared_data(args.data_dir)
 
         # Build context
-        print(f"Building context for profile '{args.profile}'...")
+        logger.info(f"Building context for profile '{args.profile}'...")
         context = build_resume_context(personal_info, args.profile, shared)
 
         # Generate resume
-        print(f"Rendering template {args.template}...")
+        logger.info(f"Rendering template {args.template}...")
         generator = ResumeGenerator(args.template)
         generator.generate_to_file(context, args.output)
 
-        print(f"\n✓ Success! Resume generated at: {args.output}")
+        logger.info("Success!")
 
-    except FileNotFoundError as e:
-        print(f"ERROR: {e}", file=sys.stderr)
-        sys.exit(1)
-    except ValidationError as e:
-        print("ERROR: Configuration validation failed:", file=sys.stderr)
-        print(e, file=sys.stderr)
-        sys.exit(1)
-    except KeyError as e:
-        print(f"ERROR: Missing reference: {e}", file=sys.stderr)
-        print(
-            "Check that all referenced IDs exist in shared data files.", file=sys.stderr
-        )
+    except ResuModelError as e:
+        logger.error(str(e))
         sys.exit(1)
     except Exception as e:
-        print(f"ERROR: {e}", file=sys.stderr)
+        logger.exception(f"Unexpected error: {e}")
         sys.exit(1)
 
 
