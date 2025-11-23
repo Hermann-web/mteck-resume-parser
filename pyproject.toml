@@ -1,0 +1,54 @@
+[project]
+name = "ResuModel"
+version = "0.1.0"
+description = "Resume generator from YAML configs"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Hermann AGOSSOU", email = "agossouhermann7@gmail.com" }
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "jinja2>=3.1.0",
+]
+
+[project.scripts]
+resumodel = "resumodel.cli:main"
+
+# python modules build tools in `tool.setuptools` and `build-system`
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["resumodel"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.18.2",
+    "pytest>=9.0.1",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.14.6",
+    "types-pyyaml>=6.0.12.20250915",
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_any_unimported = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

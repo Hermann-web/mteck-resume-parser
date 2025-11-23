@@ -1,0 +1,35 @@
+projects:
+  E_COMMERCE_PLATFORM:
+    name: "Cloud-Native E-Commerce Platform"
+    link: "https://github.com/janedoe/ecommerce-platform"
+    description: "Built a scalable microservices-based e-commerce platform using Spring Boot, React, and Kubernetes, handling 100K+ daily transactions"
+
+  RECOMMENDATION_ENGINE:
+    name: "Real-Time Product Recommendation Engine"
+    link: "https://github.com/janedoe/recommendation-engine"
+    description: "Developed a collaborative filtering recommendation system using Apache Spark and TensorFlow, improving conversion rates by 35%"
+
+  CHATBOT_AI:
+    name: "Customer Support AI Chatbot"
+    link: "https://github.com/janedoe/customer-support-bot"
+    description: "Created an NLP-powered chatbot using BERT and DialogFlow, reducing support ticket volume by 40%"
+
+  DATA_PIPELINE:
+    name: "ETL Data Pipeline Framework"
+    link: "https://github.com/janedoe/etl-framework"
+    description: "Designed and implemented a distributed ETL pipeline using Apache Airflow and Spark, processing 5TB+ daily"
+
+  MOBILE_APP:
+    name: "Fitness Tracking Mobile App"
+    link: "https://github.com/janedoe/fitness-tracker"
+    description: "Developed cross-platform mobile app using React Native, integrating with wearable devices and achieving 50K+ downloads"
+
+  SECURITY_SCANNER:
+    name: "Automated Security Vulnerability Scanner"
+    link: "https://github.com/janedoe/security-scanner"
+    description: "Built a static code analysis tool for detecting security vulnerabilities in Python and JavaScript codebases"
+
+  OPEN_SOURCE_CONTRIB:
+    name: "Open Source Contributions"
+    link: "https://github.com/janedoe"
+    description: "Active contributor to React, Kubernetes, and TensorFlow projects with 200+ merged pull requests"

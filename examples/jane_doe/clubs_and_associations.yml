@@ -1,0 +1,15 @@
+clubs_and_associations:
+  WOMEN_IN_TECH:
+    name: "Women in Technology - Bay Area Chapter"
+    role: "Board Member and Mentorship Program Lead"
+    date: "Jan 2022 - Present"
+
+  ACM_CHAPTER:
+    name: "Association for Computing Machinery"
+    role: "Member and Conference Speaker"
+    date: "Sep 2018 - Present"
+
+  TECH_VOLUNTEERS:
+    name: "Code for Good - Volunteer Organization"
+    role: "Technical Lead"
+    date: "Mar 2021 - Dec 2022"

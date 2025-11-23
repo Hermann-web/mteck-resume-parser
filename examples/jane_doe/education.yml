@@ -1,0 +1,14 @@
+education:
+  MS_STANFORD:
+    institution: "Stanford University"
+    location: "Stanford, CA"
+    degree: "Master of Science in Computer Science"
+    graduation_date: "2020"
+    notes: "Specialization in Artificial Intelligence and Machine Learning, GPA: 3.9/4.0"
+
+  BS_MIT:
+    institution: "Massachusetts Institute of Technology"
+    location: "Cambridge, MA"
+    degree: "Bachelor of Science in Computer Science and Engineering"
+    graduation_date: "2018"
+    notes: "Magna Cum Laude, Minor in Mathematics"

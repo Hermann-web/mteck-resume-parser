@@ -1,0 +1,135 @@
+profiles:
+  SOFTWARE_ENGINEER:
+    title: "Senior Software Engineer | Full Stack Developer"
+    summary: "Accomplished software engineer with 5+ years of experience building scalable distributed systems and cloud-native applications. Expertise in backend development, microservices architecture, and machine learning integration. Proven track record of delivering high-impact solutions at tech giants and innovative startups."
+    skills:
+      - category: "Programming Languages"
+        items:
+          - "Python"
+          - "Java"
+          - "Go"
+          - "JavaScript/TypeScript"
+          - "SQL"
+      - category: "Backend & Cloud"
+        items:
+          - "Spring Boot"
+          - "FastAPI"
+          - "Django"
+          - "Node.js/Express"
+          - "Microservices Architecture"
+          - "RESTful & gRPC APIs"
+          - "AWS (EC2, S3, Lambda, RDS)"
+          - "Google Cloud Platform"
+          - "Docker & Kubernetes"
+      - category: "Data & ML"
+        items:
+          - "TensorFlow"
+          - "PyTorch"
+          - "Scikit-learn"
+          - "Apache Spark"
+          - "PostgreSQL"
+          - "MongoDB"
+          - "Redis"
+          - "Kafka"
+      - category: "DevOps & Tools"
+        items:
+          - "CI/CD (Jenkins, GitHub Actions)"
+          - "Terraform"
+          - "Prometheus & Grafana"
+          - "Git"
+          - "Agile/Scrum"
+    experiences:
+      - "TECH_GIANT_SENIOR"
+      - "STARTUP_ML_ENGINEER"
+      - "AMAZON_SDE"
+      - "RESEARCH_INTERN"
+    education:
+      - "MS_STANFORD"
+      - "BS_MIT"
+    certifications:
+      - "AWS_SOLUTIONS_ARCHITECT"
+      - "GOOGLE_CLOUD_ENGINEER"
+      - "KUBERNETES_ADMIN"
+      - "PYTHON_INSTITUTE"
+    projects:
+      - "E_COMMERCE_PLATFORM"
+      - "RECOMMENDATION_ENGINE"
+      - "DATA_PIPELINE"
+      - "CHATBOT_AI"
+      - "MOBILE_APP"
+      - "SECURITY_SCANNER"
+      - "OPEN_SOURCE_CONTRIB"
+    research_papers:
+      - "MICROSERVICES_PATTERN"
+      - "ML_OPTIMIZATION"
+    clubs_and_associations:
+      - "WOMEN_IN_TECH"
+      - "ACM_CHAPTER"
+      - "TECH_VOLUNTEERS"
+    hobbies:
+      - "PHOTOGRAPHY"
+      - "MARATHON_RUNNING"
+      - "TECH_BLOGGING"
+      - "COOKING"
+
+  ML_ENGINEER:
+    title: "Machine Learning Engineer | AI Specialist"
+    summary: "Data-driven ML engineer specializing in designing, developing, and deploying production-grade machine learning systems. Strong background in deep learning, NLP, and computer vision with experience building recommendation engines and real-time prediction systems at scale."
+    skills:
+      - category: "Machine Learning"
+        items:
+          - "Deep Learning (CNN, RNN, Transformers)"
+          - "Natural Language Processing"
+          - "Computer Vision"
+          - "Recommendation Systems"
+          - "Model Deployment & MLOps"
+          - "A/B Testing & Experimentation"
+      - category: "Frameworks & Tools"
+        items:
+          - "TensorFlow"
+          - "PyTorch"
+          - "Scikit-learn"
+          - "Hugging Face"
+          - "Apache Spark MLlib"
+          - "MLflow"
+          - "Weights & Biases"
+      - category: "Programming & Data"
+        items:
+          - "Python"
+          - "SQL"
+          - "Pandas"
+          - "NumPy"
+          - "Apache Kafka"
+          - "PostgreSQL"
+          - "MongoDB"
+      - category: "Cloud & DevOps"
+        items:
+          - "AWS SageMaker"
+          - "Google Cloud AI Platform"
+          - "Docker & Kubernetes"
+          - "CI/CD Pipelines"
+    experiences:
+      - "STARTUP_ML_ENGINEER"
+      - "RESEARCH_INTERN"
+      - "TECH_GIANT_SENIOR"
+    education:
+      - "MS_STANFORD"
+      - "BS_MIT"
+    certifications:
+      - "GOOGLE_CLOUD_ENGINEER"
+      - "AWS_SOLUTIONS_ARCHITECT"
+      - "PYTHON_INSTITUTE"
+    projects:
+      - "RECOMMENDATION_ENGINE"
+      - "CHATBOT_AI"
+      - "DATA_PIPELINE"
+      - "E_COMMERCE_PLATFORM"
+    research_papers:
+      - "ML_OPTIMIZATION"
+      - "MICROSERVICES_PATTERN"
+    clubs_and_associations:
+      - "WOMEN_IN_TECH"
+      - "ACM_CHAPTER"
+    hobbies:
+      - "TECH_BLOGGING"
+      - "MARATHON_RUNNING"

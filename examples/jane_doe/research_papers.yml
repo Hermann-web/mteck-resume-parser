@@ -1,0 +1,10 @@
+research_papers:
+  MICROSERVICES_PATTERN:
+    title: "Scalable Microservices Architecture Patterns for Cloud-Native Applications"
+    authors: "Doe, J., Smith, A., Johnson, R."
+    status: "Published"
+  
+  ML_OPTIMIZATION:
+    title: "Optimizing Machine Learning Model Deployment in Production Environments"
+    authors: "Doe, J., Williams, K."
+    status: "Submitted"

@@ -1,0 +1,15 @@
+hobbies:
+  PHOTOGRAPHY:
+    name: "Landscape Photography"
+    link: "https://janedoe.photography"
+
+  MARATHON_RUNNING:
+    name: "Marathon Running"
+    description: "Completed 5 marathons including Boston and NYC"
+
+  TECH_BLOGGING:
+    name: "Technical Writing and Blogging"
+    link: "https://janedoe.tech/blog"
+
+  COOKING:
+    name: "International Cuisine Cooking"

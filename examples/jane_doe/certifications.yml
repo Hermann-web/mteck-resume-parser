@@ -1,0 +1,25 @@
+certifications:
+  AWS_SOLUTIONS_ARCHITECT:
+    name: "AWS Certified Solutions Architect - Professional"
+    issuer: "Amazon Web Services"
+    credential_link: "https://aws.amazon.com/certification/certified-solutions-architect-professional/"
+
+  GOOGLE_CLOUD_ENGINEER:
+    name: "Google Cloud Professional Data Engineer"
+    issuer: "Google Cloud"
+    credential_link: "https://cloud.google.com/certification/data-engineer"
+
+  SCRUM_MASTER:
+    name: "Certified ScrumMaster (CSM)"
+    issuer: "Scrum Alliance"
+    credential_link: "https://www.scrumalliance.org/get-certified/scrum-master-track/certified-scrummaster"
+
+  KUBERNETES_ADMIN:
+    name: "Certified Kubernetes Administrator"
+    issuer: "Cloud Native Computing Foundation"
+    credential_link: "https://www.cncf.io/certification/cka/"
+
+  PYTHON_INSTITUTE:
+    name: "PCPP - Certified Professional in Python Programming"
+    issuer: "Python Institute"
+    credential_link: "https://pythoninstitute.org/pcpp"

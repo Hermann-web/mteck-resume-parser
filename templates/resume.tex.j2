@@ -1,0 +1,218 @@
+%%%%
+% MTecknology's Resume
+% Based on work by Michael Lustfield
+% Original license: CC BY 4.0
+% https://creativecommons.org/licenses/by/4.0/
+%%%%
+
+\documentclass[a4paper,10pt]{article}
+
+% Dependencies
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{xcolor}
+
+% Fonts
+\usepackage{CormorantGaramond}
+\usepackage{charter}
+
+% Colors
+\definecolor{accentTitle}{HTML}{0e6e55}
+\definecolor{accentJobTitle}{HTML}{0e6e55}
+\definecolor{accentText}{HTML}{556080}
+\definecolor{accentLine}{HTML}{0e6e55}
+
+% Misc. Options
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\urlstyle{same}
+
+% Adjust Margins
+\addtolength{\oddsidemargin}{-0.7in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.4in}
+
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\setlength{\tabcolsep}{0pt}
+\setlength{\footskip}{3.7pt}
+\raggedbottom
+\raggedright
+
+% ATS Readability
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% Custom Commands %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{% raw %}
+% Centered title along with subtitle between HR
+\newcommand{\documentTitle}[3]{
+  \begin{center}
+    {\Huge\color{accentTitle} #1}
+    \vspace{10pt}
+    \newline
+    {\Large\color{accentJobTitle} #2}
+    \vspace{10pt}
+    {\color{accentLine} \hrule}
+    \vspace{2pt}
+    {\footnotesize{#3}}
+    \vspace{2pt}
+    {\color{accentLine} \hrule}
+  \end{center}
+}
+
+% Section heading with horizontal rule
+\titleformat{\section}{
+  \vspace{-5pt}
+  \color{accentText}
+  \raggedright\large\bfseries
+}{}{0em}{}[\color{accentLine}\titlerule]
+
+% Skill subsection heading
+\newcommand{\skillsubsection}[1]{%
+  \vspace{0.8em}%
+  {\color{accentText}\raggedright\large\bfseries #1}\par
+  \vspace{0.3em}
+  {\color{accentLine}\hrule height 0.5pt}
+  \vspace{0.3em}
+}
+
+% Section heading with separator
+\newcommand{\tinysection}[1]{
+  \phantomsection
+  \addcontentsline{toc}{section}{#1}
+  {\large{\bfseries\color{accentText}#1} {\color{accentLine} |}}
+}
+
+% Indented line with arguments left/right aligned
+\newcommand{\heading}[2]{
+  \hspace{10pt}#1\hfill#2\\
+}
+
+\newcommand{\headingBf}[2]{
+  \heading{\textbf{#1}}{\textbf{#2}}
+}
+
+\newcommand{\headingIt}[2]{
+  \heading{\textit{#1}}{\textit{#2}}
+}
+
+% Template for itemized lists
+\newenvironment{resume_list}{
+  \vspace{-7pt}
+  \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=30pt]
+}{
+  \end{itemize}
+}
+
+\renewcommand\labelitemi{--}
+{% endraw %}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Resume starts here %
+%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{
+    pdftitle={{personal_info.name}}'s Resume,
+    pdfauthor={{personal_info.name}},
+    pdfsubject={Resume},
+    pdfkeywords={Resume, CV}
+}
+
+\begin{document}
+
+\documentTitle{ {{personal_info.name}} }{ {{title}} }{
+{% if personal_info.phone %}    \href{tel:{{personal_info.phone}}}{\raisebox{-0.05\height} \faPhone\ {{personal_info.phone}}} ~ | ~
+{% endif %}{% if personal_info.email %}    \href{mailto:{{personal_info.email}}}{\raisebox{-0.15\height} \faEnvelope\ {{personal_info.email}}} ~ | ~
+{% endif %}{% if personal_info.linkedin %}    \href{ {{personal_info.linkedin}} }{\raisebox{-0.15\height} \faLinkedin\ {{personal_info.linkedin|replace('https://', '')}}} ~ | ~
+{% endif %}{% if personal_info.github %}    \href{ {{personal_info.github}} }{\raisebox{-0.15\height} \faGithub\ {{personal_info.github|replace('https://', '')}}} ~ | ~
+{% endif %}{% if personal_info.blog %}    \href{ {{personal_info.blog}} }{\raisebox{-0.15\height} \faPen\ {{personal_info.blog|replace('https://', '')}}} ~ | ~
+{% endif %}{% if personal_info.projects_page %}    \href{ {{personal_info.projects_page}} }{\raisebox{-0.15\height} \faKeyboard\ {{personal_info.projects_page|replace('https://', '')}}} ~ | ~
+{% endif %}{% if personal_info.pypi %}    \href{ {{personal_info.pypi}} }{\raisebox{-0.15\height} \faPython\ {{personal_info.pypi|replace('https://', '')}}} ~ | ~
+{% endif %}{% if personal_info.passport_dev %}    \href{ {{personal_info.passport_dev}} }{\raisebox{-0.15\height} \faPassport\ passeport.dev}
+{% endif %}}
+
+\noindent
+\begin{minipage}{1\textwidth}
+    \begin{center}
+        \tinysection{Summary}
+        {{summary}}
+    \end{center}%
+\end{minipage}%
+
+{% if sections.skills %}
+\vspace{2em}
+
+\begin{multicols}{2}
+{% for skill_category in sections.skills %}    \skillsubsection{ {{skill_category.category}} }
+    \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=15pt]
+{% for skill_item in skill_category.items %}        \item {{skill_item}}
+{% endfor %}    \end{itemize}
+{% endfor %}\end{multicols}
+{% endif %}
+
+{% if sections.experiences %}
+\section{Experiences}
+{% for experience in sections.experiences %}    \headingBf{ {{experience.company}} }{ {{experience.date}} }
+    \headingIt{ {{experience.title}}{% if experience.location %} ({{experience.location}}){% endif %} }{}
+{% if experience.bullet_points %}    \begin{resume_list}
+{% for point in experience.bullet_points %}        \item {{point}}{% if loop.last and experience.link %} (\href{ {{experience.link}} }{link}){% endif %}
+{% endfor %}    \end{resume_list}
+{% endif %}{% endfor %}{% endif %}
+
+{% if sections.education %}
+\section{Education}
+{% for edu in sections.education %}    \headingBf{ {{edu.institution}} }{ {{edu.location}} }
+    \headingIt{ {{edu.degree}}{% if edu.notes %} \textnormal{({{edu.notes}})}{% endif %} }{}
+{% endfor %}{% endif %}
+
+{% if sections.certifications %}
+\section{Certifications \& Awards}
+\begin{resume_list}
+{% for cert in sections.certifications %}    \item {{cert.name}} - \textbf{ {{cert.issuer}} } (\href{ {{cert.credential_link}} }{credential})
+{% endfor %}\end{resume_list}
+{% endif %}
+
+{% if sections.research_papers %}
+\section{Research / Working Papers}
+\begin{resume_list}
+{% for paper in sections.research_papers %}    \item {{paper.authors}}, \textit{ {{paper.title}} }. ({{paper.status}}){% if paper.link %} (\href{ {{paper.link}} }{link}){% endif %}
+{% endfor %}\end{resume_list}
+{% endif %}
+
+{% if sections.projects %}
+\section{Projects}
+\begin{resume_list}
+{% for project in sections.projects %}    \item \textbf{\href{ {{project.link}} }{ {{project.name}} } \faLink\ } {{project.description}}
+{% endfor %}\end{resume_list}
+{% endif %}
+
+{% if sections.clubs_and_associations %}
+\section{Clubs and Associations}
+\begin{resume_list}
+{% for club in sections.clubs_and_associations %}    \item \heading{\textbf{ {{club.name}} } - {{club.role}} }{ {{club.date}} }
+{% if club.description %}    {{club.description}}
+{% endif %}{% endfor %}\end{resume_list}
+{% endif %}
+
+{% if sections.hobbies %}
+\section{Hobbies}
+{% for hobby in sections.hobbies %}    {{hobby.name}}{% if hobby.link %} \href{ {{hobby.link}} }{\faLink\ }{% endif %}{% if not loop.last %} ~ | ~ {% endif %}
+{% endfor %}{% endif %}
+
+\end{document}

@@ -1,0 +1,44 @@
+experiences:
+  TECH_GIANT_SENIOR:
+    title: "Senior Software Engineer"
+    company: "Google"
+    date: "Jan 2023 - Present"
+    location: "Mountain View, CA"
+    bullet_points:
+      - "Lead development of distributed systems for Google Cloud Platform, serving millions of users globally"
+      - "Architected and implemented microservices using Go and Kubernetes, improving system reliability by 99.99%"
+      - "Mentored team of 5 junior engineers and conducted technical interviews for hiring"
+      - "Optimized database queries reducing latency by 45% and infrastructure costs by $2M annually"
+
+  STARTUP_ML_ENGINEER:
+    title: "Machine Learning Engineer"
+    company: "DataTech Solutions"
+    date: "Jun 2021 - Dec 2022"
+    location: "San Francisco, CA"
+    bullet_points:
+      - "Developed and deployed production ML models for customer churn prediction, achieving 92% accuracy"
+      - "Built real-time recommendation engine using TensorFlow and Apache Kafka processing 1M+ events/day"
+      - "Implemented A/B testing framework resulting in 25% improvement in user engagement metrics"
+      - "Collaborated with product team to define ML roadmap and prioritize feature development"
+
+  AMAZON_SDE:
+    title: "Software Development Engineer"
+    company: "Amazon Web Services"
+    date: "Aug 2020 - May 2021"
+    location: "Seattle, WA"
+    bullet_points:
+      - "Designed and implemented RESTful APIs for AWS Lambda service using Java and Spring Boot"
+      - "Developed automated testing framework reducing bug detection time by 60%"
+      - "Participated in on-call rotation and resolved production incidents with 99.95% SLA compliance"
+      - "Contributed to internal tools improving developer productivity by 30%"
+
+  RESEARCH_INTERN:
+    title: "Research Intern - AI Lab"
+    company: "Microsoft Research"
+    date: "Jun 2019 - Aug 2019"
+    location: "Redmond, WA"
+    bullet_points:
+      - "Conducted research on neural architecture search for computer vision applications"
+      - "Implemented novel attention mechanisms in PyTorch achieving 5% improvement on ImageNet"
+      - "Co-authored paper accepted at NeurIPS 2019 conference"
+      - "Presented findings to senior researchers and contributed to open-source ML frameworks"
