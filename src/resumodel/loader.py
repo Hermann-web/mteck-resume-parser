@@ -17,7 +17,7 @@ from resumodel.models import (
     Hobby,
     PersonalInfo,
 )
-from resumodel.models import TemplateContext
+from resumodel.models import TemplateContext, ResumeSections
 from resumodel.exceptions import ConfigError, DataError
 from resumodel.logging import logger
 
@@ -179,49 +179,39 @@ def build_resume_context(
     # Get the profile
     profile = shared.profiles.get(profile_name)
     if not profile:
-        raise DataError(f"Profile '{profile_name}' not found in shared data")
-
-    # Build context
-    context: dict[str, Any] = {
-        "personal_info": personal_info,
-        "title": profile.title,
-        "summary": profile.summary,
-        "sections": {},
-    }
-
-    # Add skills if present
-    if profile.skills:
-        context["sections"]["skills"] = profile.skills
+        raise DataError(f"Profile '{profile_name}' not found in profiles")
 
     # Resolve references for each section
     try:
-        context["sections"]["experiences"] = [
-            shared.experiences[exp_id] for exp_id in profile.experiences
-        ]
-        context["sections"]["projects"] = [
-            shared.projects[proj_id] for proj_id in profile.projects
-        ]
-        context["sections"]["education"] = [
-            shared.education[edu_id] for edu_id in profile.education
-        ]
-        context["sections"]["certifications"] = [
-            shared.certifications[cert_id] for cert_id in profile.certifications
-        ]
-        context["sections"]["research_papers"] = [
-            shared.research_papers[res_id] for res_id in profile.research_papers
-        ]
-        context["sections"]["clubs_and_associations"] = [
-            shared.clubs_and_associations[club_id]
-            for club_id in profile.clubs_and_associations
-        ]
-        context["sections"]["hobbies"] = [
-            shared.hobbies[hobby_id] for hobby_id in profile.hobbies
-        ]
+        sections = ResumeSections(
+            skills=profile.skills,
+            experiences=[shared.experiences[exp_id] for exp_id in profile.experiences],
+            projects=[shared.projects[proj_id] for proj_id in profile.projects],
+            education=[shared.education[edu_id] for edu_id in profile.education],
+            certifications=[
+                shared.certifications[cert_id] for cert_id in profile.certifications
+            ],
+            research_papers=[
+                shared.research_papers[res_id] for res_id in profile.research_papers
+            ],
+            clubs_and_associations=[
+                shared.clubs_and_associations[club_id]
+                for club_id in profile.clubs_and_associations
+            ],
+            hobbies=[shared.hobbies[hobby_id] for hobby_id in profile.hobbies],
+        )
     except KeyError as e:
         raise DataError(f"Missing reference in profile '{profile_name}': {e}") from e
+    except ValidationError as e:
+        raise DataError(f"Failed to validate resume sections: {e}") from e
 
     try:
-        context_parsed = TemplateContext.model_validate(context)
+        context_parsed = TemplateContext(
+            personal_info=personal_info,
+            title=profile.title,
+            summary=profile.summary,
+            sections=sections,
+        )
     except ValidationError as e:
         raise DataError(f"Failed to validate template context: {e}") from e
 
